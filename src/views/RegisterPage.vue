@@ -184,10 +184,10 @@ const register = async () => {
     return;
   }
   //check if password is less than 6 characters
-  // if (password.value.length < 6) {
-  //   alert("كلمة السر يجب ان تكون اكثر من 6 احرف");
-  //   return;
-  // }
+  if (password.value.length < 6) {
+    alert("كلمة السر يجب ان تكون اكثر من 6 احرف");
+    return;
+  }
   try {
     await store.dispatch("register", {
       name: name.value,
