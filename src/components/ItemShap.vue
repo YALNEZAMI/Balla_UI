@@ -5,17 +5,12 @@
   >
     <div @click="$router.push(`/admin/item/${item._id}`)">
       <img
-        v-if="item.images.length > 0"
         crossorigin="anonymous"
         :src="getImage()"
         class="w-full min-h-28 max-h-28"
         alt=""
       />
-      <img
-        v-else
-        src="../assets/default_photo.png"
-        class="w-full min-h-28 max-h-28"
-      />
+
       <div class="text-center mt-1 truncate">{{ item.title }}</div>
       <div class="font-medium p-1">
         {{ item.price + " " + getMoneytype() }}
@@ -109,7 +104,7 @@
               <img
                 :id="index"
                 @click="clickFileInput(index)"
-                class="w-28 h-28 m-1 rounded"
+                class="w-28 h-28 m-1 rounded cursor-pointer"
                 crossorigin="anonymous"
                 :src="img"
               />
@@ -278,12 +273,12 @@ const getMoneytype = () => {
 const getImage = () => {
   let res = `${store.state.serverUrl}/getItemImage/default_photo.png`;
   if (images.value.length > 0) {
-    images.value.forEach((img) => {
-      if (img !== `${store.state.serverUrl}/getItemImage/default_photo.png`) {
-        res = img;
-        return img;
-      }
-    });
+    const firstImg = images.value.find(
+      (img) => img !== `${store.state.serverUrl}/getItemImage/default_photo.png`
+    );
+    if (firstImg) {
+      res = firstImg;
+    }
   }
   return res;
 };

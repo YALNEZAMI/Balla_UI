@@ -15,7 +15,7 @@
         :key="img._id"
         :id="img._id"
         @click="clickFileInput(img._id)"
-        class="w-28 h-28 m-1 rounded"
+        class="w-28 h-28 m-1 rounded cursor-pointer"
         src="../assets/default_photo.png"
         :alt="img._id"
       />
@@ -167,7 +167,8 @@ const city = ref("جاسم");
 const price = ref(0);
 const isNegociablePrice = ref(true);
 const description = ref("");
-
+//number of images
+const numberOfImages = 5;
 //add item
 const addItem = async () => {
   if (
@@ -249,8 +250,6 @@ const clickFileInput = (_idImg) => {
   imgSelected.value = _idImg;
   document.getElementById("fileInput").click();
 };
-//number of images
-const numberOfImages = 4;
 
 const images = ref([]);
 for (let i = 0; i < numberOfImages; i++) {
