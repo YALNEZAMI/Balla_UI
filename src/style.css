@@ -1,0 +1,12 @@
+/* src/styles.css */
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+/* Your custom styles go here */
+.bg-turc-500 {
+    background-color: #00b4b6;
+}
+.bg-turc-600 {
+    background-color: #009a9c;
+}
