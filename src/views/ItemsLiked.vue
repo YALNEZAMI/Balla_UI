@@ -2,16 +2,12 @@
   <main>
     <div><BackButton /></div>
     <!--default message-->
-    <div v-if="store.state.myItems.length == 0" class="text-center mt-10">
-      <p>ليس لديك اي اعلانات</p>
+    <div v-if="items.length == 0" class="text-center mt-10">
+      <p>لم تعحب باي اعلان حتى الان</p>
     </div>
     <!--content-->
     <div class="flex flex-wrap mt-10">
-      <ItemShap
-        v-for="item in store.state.myItems"
-        :key="item._id"
-        :item="item"
-      />
+      <ItemShap v-for="item in items" :key="item._id" :item="item" />
     </div>
   </main>
 </template>
@@ -20,16 +16,13 @@ import BackButton from "../components/BackButton.vue";
 import ItemShap from "../components/ItemShap.vue";
 
 import { useStore } from "vuex";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
+const items = ref([]);
 
 const store = useStore();
 onMounted(async () => {
   //if there is no items in the store, get them from the server
-  if (store.state.myItems.length == 0) {
-    const res = await store.dispatch("getItems", {
-      ownerId: store.state.user._id,
-    });
-    store.commit("setMyItems", res);
-  }
+  const res = await store.dispatch("getItemsLiked");
+  items.value = res;
 });
 </script>

@@ -5,9 +5,15 @@
     <div class="bg-turc-600 p-2">
       <button
         @click="router.push('my-items')"
-        class="underline bg-white p-1 rounded-md hover:text-white hover:bg-black"
+        class="underline bg-white p-1 mx-1 rounded-md hover:text-white hover:bg-black"
       >
         اعلاناتي
+      </button>
+      <button
+        @click="router.push('items-liked')"
+        class="underline bg-white p-1 rounded-md hover:text-white hover:bg-black"
+      >
+        المعحب به
       </button>
     </div>
     <!--alert-->

@@ -8,13 +8,14 @@ import AddItemPage from "../views/AddItemPage.vue";
 import ItemPage from "../views/ItemPage.vue";
 import CategoryItems from "../views/CategoryItems.vue";
 import MyItems from "../views/MyItems.vue";
+import ItemsLiked from "../views/ItemsLiked.vue";
 
 export const routes = [
   {
     path: "/",
     name: "root",
-    // redirect: "/auth/login",
-    redirect: "/admin/home",
+    redirect: "/auth/login",
+    // redirect: "/admin/home",
   },
   {
     path: "/auth",
@@ -51,6 +52,11 @@ export const routes = [
             component: MyItems,
           },
           {
+            path: "items-liked",
+            name: "items i liked",
+            component: ItemsLiked,
+          },
+          {
             path: "main",
             name: "main",
             component: ProfilePage,
@@ -79,11 +85,11 @@ export const routes = [
       },
     ],
   },
-  // {
-  //   path: "/:pathMatch(.*)*",
-  //   name: "not-found",
-  //   redirect: "/auth/login",
-  // },
+  {
+    path: "/:pathMatch(.*)*",
+    name: "not-found",
+    redirect: "/auth/login",
+  },
 ];
 export const router = createRouter({
   history: createWebHistory(),

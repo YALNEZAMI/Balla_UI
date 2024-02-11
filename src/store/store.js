@@ -143,5 +143,27 @@ export const store = createStore({
       const data = await res.json();
       return data;
     },
+    async likeItem({ commit, state }, idItem) {
+      const userId = state.user._id;
+      const res = await itemService.patch(idItem, {
+        $push: { likes: userId },
+      });
+      return res;
+    },
+    async removeLikeItem({ commit, state }, idItem) {
+      const userId = state.user._id;
+      const res = await itemService.patch(idItem, {
+        $pull: { likes: userId },
+      });
+      return res;
+    },
+    async getItemsLiked({ commit, state }) {
+      const res = await itemService.find({
+        query: {
+          likes: state.user._id,
+        },
+      });
+      return res.data;
+    },
   },
 });
