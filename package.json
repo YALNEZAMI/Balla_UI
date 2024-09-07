@@ -13,6 +13,7 @@
     "@feathersjs/feathers": "^5.0.21",
     "@feathersjs/rest-client": "^5.0.21",
     "@feathersjs/socketio-client": "^5.0.21",
+    "bala-ui": "file:",
     "socket.io-client": "^4.7.4",
     "vue": "^3.3.11",
     "vue-router": "^4.2.5",
