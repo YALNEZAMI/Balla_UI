@@ -1,9 +1,12 @@
 <template>
   <main
     id="main1"
-    class="bg-gray-400 cursor-pointer min-w-28 max-w-28 min-h-44 max-h-max m-1 rounded"
+    class="bg-gray-400 min-w-28 max-w-28 min-h-44 max-h-max m-1 rounded"
   >
-    <div @click="$router.push(`/admin/item/${item._id}`)">
+    <div
+      @click="$router.push(`/admin/item/${item._id}`)"
+      class="cursor-pointer"
+    >
       <img
         crossorigin="anonymous"
         :src="getImage()"
@@ -89,10 +92,10 @@
       <!--update form-->
       <div
         v-if="updateItemBool"
-        class="fixed top-0 left-0 w-full h-full bg-black bg-opacity-50 flex justify-center items-center"
+        class="fixed top-0 left-0 w-full h-screen bg-black bg-opacity-50 flex justify-center items-center overflow-auto"
       >
         <form class="bg-white w-11/12 p-2 rounded">
-          <div class="flex justify-center flex-wrap mt-2">
+          <div class="flex justify-center pt-16 flex-wrap mt-2">
             <input
               accept=".jpg, .png"
               class="hidden"

@@ -189,13 +189,17 @@ const priceMin = ref(0);
 const priceMax = ref(1000);
 const isNegociablePrice = ref("noProblem");
 
-//search function
 const items = ref([]);
+//search function
 const search = async () => {
+  const searchKeyLowerCase = searchKey.value.toLocaleLowerCase();
+  const searchKeyUpperCase = searchKey.value.toLocaleUpperCase();
   const searchQuery = {
     $or: [
-      { title: { $regex: searchKey.value } },
-      { description: { $regex: searchKey.value } },
+      { title: { $regex: searchKeyLowerCase } },
+      { description: { $regex: searchKeyLowerCase } },
+      { title: { $regex: searchKeyUpperCase } },
+      { description: { $regex: searchKeyUpperCase } },
     ],
     category: category.value,
     country: country.value,
