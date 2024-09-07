@@ -3,6 +3,24 @@
     <div
       class="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8"
     >
+      <!--language select-->
+      <div class="flex flex-col mb-3">
+        Language | 语
+        <select
+          @change="setLanguage()"
+          v-model="language"
+          class="w-44 my-1 bg-blue-300 rounded p-1 cursor-pointer"
+        >
+          <option
+            v-for="lang of languages"
+            :key="lang"
+            :value="lang.value"
+            class="bg-blue-300"
+          >
+            {{ lang.name }}
+          </option>
+        </select>
+      </div>
       <div class="sm:mx-auto sm:w-full sm:max-w-sm">
         <img
           class="mx-auto h-32 w-32 rounded-md"
@@ -12,7 +30,7 @@
         <h2
           class="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900"
         >
-          انشئ حسابك على موقع البالة
+          {{ createTitle() }}
         </h2>
       </div>
 
@@ -22,7 +40,7 @@
           v-if="alreadyMember"
           class="text-center p-2 bg-red-500 text-white rounded-md"
         >
-          هناك حساب مسجل بهذا البريد الالكتروني
+          {{ alertUsedMail() }}
         </p>
         <form class="space-y-2">
           <!--name-->
@@ -31,7 +49,7 @@
               for="name"
               class="block text-sm font-medium leading-6 text-gray-900"
             >
-              الاسم</label
+              {{ nameLabel() }}</label
             >
             <div class="mt-2">
               <input
@@ -51,7 +69,7 @@
               for="name"
               class="block text-sm font-medium leading-6 text-gray-900"
             >
-              رقم الهاتف</label
+              {{ numberLabel() }}</label
             >
             <div class="mt-2">
               <input
@@ -70,7 +88,8 @@
             <label
               for="email"
               class="block text-sm font-medium leading-6 text-gray-900"
-              >عنوانك الالكتروني</label
+            >
+              {{ emailLabel() }}</label
             >
             <div class="mt-2">
               <input
@@ -91,8 +110,9 @@
               <label
                 for="password"
                 class="block text-sm font-medium leading-6 text-gray-900"
-                >كلمة السر</label
               >
+                {{ passwordLabel() }}
+              </label>
             </div>
             <div class="mt-2">
               <input
@@ -114,8 +134,8 @@
                 for="password"
                 class="block text-sm font-medium leading-6 text-gray-900"
               >
-                تاكيد كلمة السر</label
-              >
+                {{ confirmPasswordLabel() }}
+              </label>
             </div>
             <div class="mt-2">
               <input
@@ -137,18 +157,18 @@
               type="button"
               class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
-              انشاء
+              {{ createButton() }}
             </button>
           </div>
         </form>
 
         <p class="mt-5 text-center text-sm text-gray-500">
-          عندك حساب؟
+          {{ alreadyAccount() }}
           <router-link
             class="text-blue-500 hover:text-blue-700"
             to="/auth/login"
           >
-            سجل دحول فورا
+            {{ loginLabel() }}
           </router-link>
         </p>
       </div>
@@ -173,7 +193,11 @@ const number = ref("");
 const email = ref("");
 const password = ref("");
 const confirmPassword = ref("");
-
+const language = ref(store.state.language);
+const languages = ref(store.state.languages);
+const setLanguage = () => {
+  store.commit("setLanguage", language.value);
+};
 //other data
 const alreadyMember = ref(false);
 //create user
@@ -210,5 +234,105 @@ const register = async () => {
       }, 3000);
     }
   } catch (error) {}
+};
+const createTitle = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Créer un compte Balla";
+    case "ar":
+      return "انشئ حساب على موقع البالة";
+    default:
+      break;
+  }
+};
+const emailLabel = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Adresse email";
+    case "ar":
+      return " عنوانك الالكتروني";
+    default:
+      break;
+  }
+};
+const nameLabel = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Nom";
+    case "ar":
+      return " الاسم";
+    default:
+      break;
+  }
+};
+const numberLabel = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Numéro de téléphone ";
+    case "ar":
+      return " رقم هاتف";
+    default:
+      break;
+  }
+};
+const passwordLabel = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Mot de passe";
+    case "ar":
+      return " كلمة السر";
+    default:
+      break;
+  }
+};
+const confirmPasswordLabel = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Confirmation du mot de passe";
+    case "ar":
+      return "تاكيد كلمة السر";
+    default:
+      break;
+  }
+};
+const createButton = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Se connecter";
+    case "ar":
+      return "اتصال";
+    default:
+      break;
+  }
+};
+const alreadyAccount = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Déjà un compte ?";
+    case "ar":
+      return "لديكم حساب ? ";
+    default:
+      break;
+  }
+};
+const loginLabel = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Connectez-vous ";
+    case "ar":
+      return "سجل دخول";
+    default:
+      break;
+  }
+};
+const alertUsedMail = () => {
+  switch (store.state.language) {
+    case "fr":
+      return "Mail déjà utilisé ! ";
+    case "ar":
+      return "هناك حساب مسجل بهذا البريد الالكتروني";
+    default:
+      break;
+  }
 };
 </script>
