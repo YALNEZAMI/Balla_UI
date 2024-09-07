@@ -26,9 +26,24 @@ export const store = createStore({
       accessToken: localStorage.getItem("accessToken") || null,
       myItems: [],
       serverUrl: api,
+      languages: [
+        {
+          value: "fr",
+          name: "Français",
+        },
+        {
+          value: "ar",
+          name: "العربية",
+        },
+      ],
+      language: "fr",
     };
   },
   mutations: {
+    setLanguage(state, l) {
+      state.language = l;
+      localStorage.setItem("language", l);
+    },
     setUser(state, user) {
       state.user = user;
       localStorage.setItem("user", JSON.stringify(user));
